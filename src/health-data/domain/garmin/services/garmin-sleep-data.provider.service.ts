@@ -1,11 +1,12 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { GarminConnectService } from './garmin-connect.service';
-import { ISleepDataProvider, SleepData } from 'src/health-data/interfaces/sleep-data.interface';
+import { SleepDataProviderInterface, SleepDataInterface } from 'src/health-data/interfaces/sleep-data.interface';
 import { IConnectable } from 'src/health-data/interfaces/connectable.interface';
 import { GarminConnect } from 'garmin-connect';
+import { SleepDataDataObject } from 'src/health-data/domain/data-objects/sleep-data.data.object';
 
 @Injectable()
-export class GarminSleepDataProviderService implements ISleepDataProvider {
+export class GarminSleepDataProviderService implements SleepDataProviderInterface {
     private readonly logger = new Logger(GarminSleepDataProviderService.name);
 
     constructor(
@@ -13,7 +14,7 @@ export class GarminSleepDataProviderService implements ISleepDataProvider {
         private readonly garminConnect: IConnectable<GarminConnect>
     ) { }
 
-    async getSleepData(startDate: Date, endDate: Date): Promise<SleepData[]> {
+    async getSleepData(startDate: Date, endDate: Date): Promise<SleepDataInterface[]> {
         if (!this.garminConnect.isConnected()) {
             await this.garminConnect.connect()
         }
@@ -21,11 +22,14 @@ export class GarminSleepDataProviderService implements ISleepDataProvider {
         return [];
     }
 
-    async getLatestSleepData(): Promise<SleepData | null> {
+    async getLatestSleepData(): Promise<SleepDataInterface | null> {
         if (!this.garminConnect.isConnected()) {
             await this.garminConnect.connect()
         }
         this.logger.log('Fetching latest sleep data');
-        return null;
+        const client = this.garminConnect.getClient();
+        const garminSleepData = await client.getSleepData();
+
+        return SleepDataDataObject.fromGarminSleepData(garminSleepData.dailySleepDTO);
     }
 } 

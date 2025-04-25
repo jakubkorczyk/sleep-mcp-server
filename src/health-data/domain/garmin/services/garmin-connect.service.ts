@@ -12,15 +12,22 @@ export class GarminConnectService implements IConnectable<GarminConnect> {
 
   constructor(
     @Inject(GarminConfigService)
-    private readonly garminConfig: IGarminConfig) {}
+    private readonly garminConfig: IGarminConfig) { }
+
+  getClient(): GarminConnect {
+    if (!this.client) {
+      throw new Error('GarminConnect client not initialized');
+    }
+    return this.client;
+  }
 
   async connect(): Promise<GarminConnect> {
     const username = this.garminConfig.getGarminConnectUsername();
     const password = this.garminConfig.getGarminConnectPassword();
-    
+
     const GCClient = new GarminConnect({
-        username,
-        password
+      username,
+      password
     });
 
     this.logger.log(`Connecting to Garmin with username: ${username}`);

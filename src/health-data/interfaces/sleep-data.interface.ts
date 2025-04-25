@@ -1,4 +1,4 @@
-export interface SleepData {
+export interface SleepDataInterface {
   startTime: Date;
   endTime: Date;
   duration: number;
@@ -10,7 +10,7 @@ export interface SleepData {
   sleepEfficiency?: number;
 }
 
-export interface ISleepDataProvider {
-  getSleepData(startDate: Date, endDate: Date): Promise<SleepData[]>;
-  getLatestSleepData(): Promise<SleepData | null>;
+export interface SleepDataProviderInterface {
+  getSleepData(startDate: Date, endDate: Date): Promise<SleepDataInterface[]>;
+  getLatestSleepData(): Promise<SleepDataInterface | null>;
 } 
