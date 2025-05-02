@@ -5,4 +5,11 @@ export type ReadResourceResult = {
         text?: string;
         blob?: Blob;
     }>;
-}; 
+};
+
+export type ReadToolResult = {
+    content: Array<{
+        type: string;
+        text: string;
+    }>;
+};

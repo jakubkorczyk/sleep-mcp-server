@@ -12,7 +12,8 @@ export class GarminConnectService implements IConnectable<GarminConnect> {
 
   constructor(
     @Inject(GarminConfigService)
-    private readonly garminConfig: IGarminConfig) { }
+    private readonly garminConfig: IGarminConfig,
+  ) {}
 
   getClient(): GarminConnect {
     if (!this.client) {
@@ -27,7 +28,7 @@ export class GarminConnectService implements IConnectable<GarminConnect> {
 
     const GCClient = new GarminConnect({
       username,
-      password
+      password,
     });
 
     this.logger.log(`Connecting to Garmin with username: ${username}`);
@@ -37,7 +38,6 @@ export class GarminConnectService implements IConnectable<GarminConnect> {
     this.connected = true;
     this.client = GCClient;
     this.logger.log('Successfully connected to Garmin Connect');
-
 
     return GCClient;
   }
@@ -51,4 +51,4 @@ export class GarminConnectService implements IConnectable<GarminConnect> {
   isConnected(): boolean {
     return this.connected;
   }
-} 
+}
