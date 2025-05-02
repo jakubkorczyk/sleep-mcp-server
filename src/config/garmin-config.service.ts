@@ -8,8 +8,12 @@ export class GarminConfigService implements IGarminConfig {
   private readonly garminConnectPassword: string;
 
   constructor(private readonly envLoader: EnvLoaderService) {
-    this.garminConnectUsername = this.envLoader.getEnvVariable('GARMIN_CONNECT_USERNAME');
-    this.garminConnectPassword = this.envLoader.getEnvVariable('GARMIN_CONNECT_PASSWORD');
+    this.garminConnectUsername = this.envLoader.getEnvVariable(
+      'GARMIN_CONNECT_USERNAME',
+    );
+    this.garminConnectPassword = this.envLoader.getEnvVariable(
+      'GARMIN_CONNECT_PASSWORD',
+    );
   }
 
   getGarminConnectUsername(): string {
@@ -19,4 +23,4 @@ export class GarminConfigService implements IGarminConfig {
   getGarminConnectPassword(): string {
     return this.garminConnectPassword;
   }
-} 
+}
