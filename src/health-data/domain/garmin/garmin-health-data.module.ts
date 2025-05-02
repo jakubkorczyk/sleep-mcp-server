@@ -8,4 +8,4 @@ import { GarminSleepDataProviderService } from './services/garmin-sleep-data.pro
   providers: [GarminConnectService, GarminSleepDataProviderService],
   exports: [GarminConnectService, GarminSleepDataProviderService],
 })
-export class GarminHealthDataModule { } 
+export class GarminHealthDataModule {}

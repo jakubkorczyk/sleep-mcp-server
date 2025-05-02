@@ -7,4 +7,4 @@ import { SleepDataHandler } from './app/mcp/sleep-data.handler';
   providers: [SleepDataHandler],
   exports: [GarminHealthDataModule],
 })
-export class HealthDataModule { }
+export class HealthDataModule {}

@@ -6,4 +6,4 @@ import { GarminConfigService } from './garmin-config.service';
   providers: [GarminConfigService, EnvLoaderService],
   exports: [GarminConfigService],
 })
-export class ConfigModule {} 
+export class ConfigModule {}

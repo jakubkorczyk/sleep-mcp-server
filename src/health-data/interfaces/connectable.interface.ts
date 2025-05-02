@@ -3,4 +3,4 @@ export interface IConnectable<T> {
   disconnect(): Promise<void>;
   isConnected(): boolean;
   getClient(): T;
-} 
+}
